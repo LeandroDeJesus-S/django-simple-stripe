@@ -1,0 +1,96 @@
+.hidden {
+    display: none;
+}
+
+#payment-form {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+#payment-form > .payment-elements > .payment-element-container > button#submit {
+    display: block;
+    width: 100%;
+    height: 2rem;
+    border-radius: .5rem;
+    border: .1px solid silver;
+    background-color: seagreen;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.payment-elements {
+    display: grid;
+}
+.payment-elements > #product-element > img {
+    width: 100%;
+}
+#product-element .product-info {
+    font-family: sans-serif;
+}
+#product-element > .product-info > #product-price  {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    
+}
+
+#payment-element {
+    margin-bottom: 1rem;
+}
+
+#payment-message {
+    color: rgb(105, 115, 134);
+    font-size: 16px;
+    line-height: 20px;
+    padding-top: 12px;
+    text-align: center;
+}
+
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3; /* Cor do fundo */
+    border-top: 5px solid #3498db; /* Cor da borda superior */
+    border-radius: 50%; /* Tornar o círculo redondo */
+    animation: spin 1s linear infinite; /* Animação contínua */
+}
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+@keyframes spin {
+    0% {
+      transform: rotate(0deg); /* Início da rotação */
+    }
+    100% {
+      transform: rotate(360deg); /* Rotação completa */
+    }
+}
+
+
+@media screen and (min-width: 576px) {
+    #product-element, #payment-element {
+        width: 45vw;
+    }
+    .payment-elements {
+        grid-template-columns: 1fr 1fr;
+        column-gap: 1rem
+    }
+    .payment-element-container {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+        /* padding: .2rem; */
+    }
+    #payment-element {
+        margin-bottom: .5rem;
+    }
+}

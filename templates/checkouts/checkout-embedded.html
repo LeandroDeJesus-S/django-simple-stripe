@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+	<div id="checkout">
+		<!-- Checkout will insert the payment form here -->
+		<div id="checkout-line-items">
+			<form id="paymentForm" data-public="{{STRIPE_PUBLIC_KEY}}">{% csrf_token %}
+				<h1>Continue to the payment payment page?</h1>
+				<button type="button" id="continuePaymentBtn" style="cursor: pointer;">Continue</button>
+				<button type="button"><a href="/" style="text-decoration: none;">Back to home page</a></button>
+			</form>
+		</div>
+	</div>
+
+
+{% endblock content %}
+
+{% block checkout_script %}
+	<script>
+		const stripe = new Stripe("{{ STRIPE_PUBLIC_KEY|escapejs }}");
+		const handler = new StripeCheckoutEmbeddedHandler(stripe);
+		handler.handle({ 
+			checkoutUrl: `${location.origin}{% url 'checkout' %}`, 
+			csrfToken: getCookie('csrftoken'), 
+			checkoutElementSelector: '#checkout',
+			confirmationBtnSelector: '#continuePaymentBtn'
+		})
+	</script>
+{% endblock checkout_script %}

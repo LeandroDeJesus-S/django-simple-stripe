@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section id="success" class="hidden">
+	<p>
+		Congratulations ! {% if customer_email %}A confirmation email will be sent to <strong>{{ customer_email }}</strong>.{% endif %}
+	</p>
+	
+	<table>
+		<thead>
+			<tr>
+				<th>status</th>
+				<th>total amount</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>{{ status }}</td>
+				<td>{{ total }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p><a href='/'>Click here to back to the home page</a></p>
+</section>
+
+{% endblock content %}

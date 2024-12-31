@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% block checkout_css %}{% endblock checkout_css %}
+    <title>Django Simple Stripe</title>
+</head>
+<body>
+    {% block content %}{% endblock content %}
+
+    <script src="https://js.stripe.com/v3/"></script>
+    
+    <script src="{% static 'js/utils.js' %}"></script>
+    <script src="{% static 'js/interfaces.js' %}"></script>
+    <script src="{% static 'js/stripe-payment-handlers.js' %}"></script>
+    {% block checkout_script %}{% endblock checkout_script %}    
+</body>
+</html>

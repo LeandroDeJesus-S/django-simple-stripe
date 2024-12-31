@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block checkout_css %}
+    <link rel="stylesheet" href="{% static 'css/checkouts/checkout-custom.css' %}">
+{% endblock checkout_css %}
+
+{% block content %}
+
+<form id="payment-form">
+    <div class="payment-elements">
+        <div id="product-element">
+            <img src="{{ product.image }}" alt="" id="product-img">
+            <div class="product-info">
+                <h1 id="product-name">{{ product.name }}</h1>
+                <p id="product-price">{{ product.price }}</p>
+            </div>
+        </div>
+
+        <div class="payment-element-container">
+            <div id="payment-element">
+            </div>
+            
+            <button id="payNowButton" type="button">
+                <div id="spinner" class="spinner hidden"></div>
+                <span id="button-text">Pay now</span>
+            </button>
+        </div>
+
+    </div>
+	<div id="payment-message" class="hidden"></div>
+</form>
+
+
+{% endblock content %}
+
+{% block checkout_script %}
+    <script>
+        const stripe = new Stripe("{{STRIPE_PUBLIC_KEY|escapejs}}");
+        const stripeHandler = new StripeCustomCheckoutHandler(stripe);
+        stripeHandler.handle({
+            csrfToken: getCookie('csrftoken'),
+			checkoutUrl: `${location.origin}{% url 'checkout' %}`,
+			layout: 'accordion',
+			paymentElementSelector: '#payment-element',
+			confirmPaymentElementSelector: '#payNowButton',
+			returnUrl: `${location.origin}{% url 'checkout_session_return' %}`,
+        });
+
+        setTimeout(
+            () => showSpinner(false),
+            7000
+        );
+    </script>
+{% endblock checkout_script %}
